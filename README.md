@@ -98,3 +98,8 @@ A few resources to get you on your way with Scala.
 1. [Scala School](https://twitter.github.io/scala_school/) - An opinionated tour of Scala designed "at Twitter to prepare experienced engineers to be productive Scala programmers"
 
 2. [Effective Scala](http://twitter.github.io/effectivescala/) - Written by Marius Eriksen, author of Finagle. Good introduction to some patterns that people have found effective.
+
+
+i'm not 100% sure (you should check with @brian) but i think what you will want to do is add a `processor` in `ClownCarServer#makeProcessors`; follow the pattern there to define an `EventMessage` topic and event name to listen to (it may be ok to use the "free" event that comes from the call to `updateEntity`), and define the logic for fetching the phone number (either from db or from the event payload), and ship that up to salesforce
+
+re: specific question you had for how to send it an `EventMessage`: use kafka, use the existing thrift event capture infrastructure if appropriate, or define your own topic/event/payload
